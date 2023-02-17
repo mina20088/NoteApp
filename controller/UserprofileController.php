@@ -1,12 +1,24 @@
 <?php
 
 
-
-
-
-if(!isset($_SESSION['user_id'])){
-    abort(401);
+if(isset($_SESSION['user_id']) && isset($_SESSION['first_name'])){
+    $title = $_SESSION['first_name'] . "Profile";
+    require './views/profile.view.php';
+}else{
+    abort (401);
 }
 
 
-require './views/profile.view.php';
+
+
+
+
+
+
+
+
+
+
+
+
+

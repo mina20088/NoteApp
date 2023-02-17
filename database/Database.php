@@ -37,10 +37,10 @@ class Database
         return $this->statement->fetch();
     }
 
-    public function findOrFail(int $status){
+    public function findOrFail(){
         $result = $this->find();
         if(!$result){
-            abort($status);
+            abort();
         }
         return $result;
     }

@@ -10,6 +10,7 @@
     <title><?php echo $title ?? "" ?></title>
 </head>
 <body>
+<?php  require './views/Partials/svgs.php' ?>
 
 <div class="container-fluid">
     <header class="d-sm-flex justify-content-sm-between flex-wrap align-items-center justify-content-sm-center justify-content-md-between py-3 mb-4 border-bottom header">

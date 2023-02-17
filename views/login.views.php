@@ -1,24 +1,33 @@
 
 <?php require 'views/Partials/head.views.php' ?>
-<main class="container-fluid">
+<main class="container-fluid form-signin w-100 m-auto">
 
     <header class="container-fluid text-dark p-5 ">
         <h2><?= $title ?></h2>
     </header>
-    <div class="container">
-        <form action="/login" method="POST">
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label" >Email</label>
-                <input type="text" class="form-control"  name="email" value="" id="formGroupExampleInput" placeholder="Email">
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" value="" id="formGroupExampleInput2" placeholder="password">
-            </div>
-            <div class="mb-3">
-                <button type="submit" name="submit" class="btn btn-primary">login</button>
-            </div>
-        </form>
-    </div>
+
+    <form method="post">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="email"  id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <?php if(isset($errors['email'])): ?>
+            <span class="text-danger">*<?= $errors['email'] ?></span>
+        <?php endif; ?>
+        <div class="form-floating">
+            <input type="password" class="form-control"  name="password" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <?php if(isset($errors['password'])): ?>
+            <span class="text-danger">*<?= $errors['password'] ?></span>
+        <?php endif; ?>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" name="login" type="submit">Sign in</button>
+    </form>
 </main>
 <?php require 'views/Partials/fotter.views.php' ?>

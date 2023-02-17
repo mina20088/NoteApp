@@ -6,7 +6,7 @@
 
         <ul>
             <?php if ( isset( $note ) ): ?>
-                <li><?= $note['body']?></li>
+                <li><?= htmlspecialchars ($note['body']) ?></li>
             <?php endif;?>
         </ul>
         <a class="btn btn-primary" href="/">back</a>

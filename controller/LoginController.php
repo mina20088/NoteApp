@@ -1,15 +1,9 @@
 <?php
-
-
+error_reporting(0);
 
 use database\Database;
-
 require './database/Database.php';
-
-$title = "Login";
-
 $config = require './config/database.php';
-
 $connection = new Database(
     datasource: $config['connections']['mysql']['driver'],
     config: $config['connections']['mysql']['config'],
@@ -17,35 +11,56 @@ $connection = new Database(
     password: $config['connections']['mysql']['password'],
 );
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    if (isset($_POST['submit'])) {
-        $user = $_POST['email'];
-        $password = $_POST['password'];
 
+
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['login'])) {
+    $user = $_POST['email'];
+    $password = $_POST['password'];
+    $errors = [];
+
+    $userExists = $connection->query ('select * from users where email = :email',['email'=> $user])->find ();
+
+
+
+
+    if(!$userExists){
+        $errors['email'] = 'email is not exists in our database';
+    }
+
+    if($userExists['password'] !== $password){
+        $errors['password'] = 'password is not correct';
+    }
+
+    if(strlen ($user) === 0){
+        $errors['email'] = "email is required";
+    }
+    if(strlen ($password) === 0) {
+        $errors['password'] = "password is required";
+    }
+
+
+    if(empty($errors)){
         $user_login = $connection
-            ->query(
+            ->query (
                 'select * from users 
-                        where email = :email && password = :password ', ['email' => $user, 'password' => $password])
-            ->findOrFail(404);
-
+                        where email = :email && password = :password ', ['email' => $user, 'password' => $password] )
+            ->findOrFail ( 404 );
         if (!$user_login) {
             echo "wrong email or password";
-
-        } else {
+        }else {
             $_SESSION['user_id'] = $user_login['id'];
             $_SESSION['user_email'] = $user_login['email'];
             $_SESSION['first_name'] = $user_login['first_name'];
             $_SESSION['message'] = "logged in";
-
+            header ("Location:/profile?id={$_SESSION['user_id']}");
         }
     }
-}
-if ($_SERVER['REQUEST_METHOD'] === "GET") {
-    require "./views/login.views.php";
+
+
 }
 
-/*require "./views/profile.view.php";*/
-header('Location:/profile');
+require "./views/login.views.php";
+
 
 
 
