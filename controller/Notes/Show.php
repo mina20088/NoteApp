@@ -40,4 +40,4 @@ if(isset($_GET['id']) && !isset($_SESSION['user_id'])){
     $title = $note['title'];
 }
 
-require './views/note.views.php';
+require './views/Notes/show.view.php';

@@ -1,9 +1,10 @@
 <?php
-error_reporting(0);
+error_reporting(1);
 
 use database\Database;
 require './database/Database.php';
 $config = require './config/database.php';
+
 $connection = new Database(
     datasource: $config['connections']['mysql']['driver'],
     config: $config['connections']['mysql']['config'],
@@ -14,36 +15,39 @@ $connection = new Database(
 
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['login'])) {
-    $user = $_POST['email'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
     $errors = [];
 
-    $userExists = $connection->query ('select * from users where email = :email',['email'=> $user])->find ();
+    $all = $connection->query ('select * from users')->all ();
+    $user  = $connection->query ('select * from users where email = :email',['email'=> $email])->find ();
 
 
-
-
-    if(!$userExists){
+    if(!Validator::exists ($email,$all,'email')){
         $errors['email'] = 'email is not exists in our database';
     }
 
-    if($userExists['password'] !== $password){
+    if(!Validator::equals ($user['password'],$password)){
         $errors['password'] = 'password is not correct';
     }
 
-    if(strlen ($user) === 0){
+    if(Validator::required ($email)){
         $errors['email'] = "email is required";
     }
-    if(strlen ($password) === 0) {
+    if(Validator::required ($password)) {
         $errors['password'] = "password is required";
     }
+    if(!Validator::email ($email) && !Validator::required ($email)){
+        $errors['email'] = "invalid email format";
+    }
+
 
 
     if(empty($errors)){
         $user_login = $connection
             ->query (
                 'select * from users 
-                        where email = :email && password = :password ', ['email' => $user, 'password' => $password] )
+                        where email = :email && password = :password ', ['email' => $email, 'password' => $password] )
             ->findOrFail ( 404 );
         if (!$user_login) {
             echo "wrong email or password";
@@ -52,6 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['login'])) {
             $_SESSION['user_email'] = $user_login['email'];
             $_SESSION['first_name'] = $user_login['first_name'];
             $_SESSION['message'] = "logged in";
+            $_SESSION['start'] = time();
+            $_SESSION['expire'] = $_SESSION['start'] + (10);
             header ("Location:/profile?id={$_SESSION['user_id']}");
         }
     }
@@ -59,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['login'])) {
 
 }
 
-require "./views/login.views.php";
+require "./views/Users/login.view.php";
 
 
 

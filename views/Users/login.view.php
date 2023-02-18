@@ -9,14 +9,14 @@
     <form method="post">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
         <div class="form-floating">
-            <input type="text" class="form-control" name="email"  id="floatingInput" placeholder="name@example.com">
+            <input type="text" class="form-control" name="email"  id="floatingInput" placeholder="Email" value="<?php echo $_POST['email'] ?? '' ?>">
             <label for="floatingInput">Email address</label>
         </div>
         <?php if(isset($errors['email'])): ?>
             <span class="text-danger">*<?= $errors['email'] ?></span>
         <?php endif; ?>
         <div class="form-floating">
-            <input type="password" class="form-control"  name="password" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control"  name="password" id="floatingPassword" placeholder="Password" value="<?php echo $_POST['password'] ?? '' ?>" >
             <label for="floatingPassword">Password</label>
         </div>
         <?php if(isset($errors['password'])): ?>

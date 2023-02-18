@@ -3,7 +3,7 @@
     <header class="d-flex justify-content-between align-items-center text-dark p-5 ">
         <h2><?= $title ?></h2>
         <?php if(isset($_SESSION['user_id'])):?>
-        <a href="/note/create-note" class="btn btn-info">
+        <a href="/note/create" class="btn btn-info">
             Create Note
         </a>
         <?php endif; ?>

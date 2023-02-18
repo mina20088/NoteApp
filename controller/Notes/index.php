@@ -27,4 +27,4 @@ if(isset($_SESSION['user_id'])){
 
 
 
-require './views/notes.views.php';
+require './views/Notes/index.view.php';

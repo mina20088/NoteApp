@@ -9,6 +9,6 @@
                 <li><?= htmlspecialchars ($note['body']) ?></li>
             <?php endif;?>
         </ul>
-        <a class="btn btn-primary" href="/">back</a>
+        <a class="btn btn-primary" href="/notes">back</a>
     </main>
 <?php require 'views/Partials/fotter.views.php' ?>
