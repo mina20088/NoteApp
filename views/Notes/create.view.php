@@ -1,4 +1,4 @@
-<?php require 'views/Partials/head.views.php' ?>
+<?php require base_path ('views/Partials/head.views.php'); ?>
     <main class="container-fluid">
         <div class="container">
             <h1>Create A Note</h1>
@@ -26,4 +26,4 @@
         </div>
 
     </main>
-<?php require 'views/Partials/fotter.views.php' ?>
+<?php require base_path ('views/Partials/fotter.views.php'); ?>

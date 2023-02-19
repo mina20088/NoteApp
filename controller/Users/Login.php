@@ -2,8 +2,8 @@
 error_reporting(1);
 
 use database\Database;
-require './database/Database.php';
-$config = require './config/database.php';
+
+$config = require base_path ('config/database.php');
 
 $connection = new Database(
     datasource: $config['connections']['mysql']['driver'],
@@ -65,7 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['login'])) {
 
 }
 
-require "./views/Users/login.view.php";
+
+Render::view ('Users/login.view.php',[
+    'title'=>'Login',
+    'errors' =>$errors,
+    'all' => $all,
+    'user' => $user
+]);
+
 
 
 

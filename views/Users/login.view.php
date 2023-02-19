@@ -1,5 +1,5 @@
 
-<?php require 'views/Partials/head.views.php' ?>
+<?php  require base_path ('views/Partials/head.views.php') ?>
 <main class="container-fluid form-signin w-100 m-auto">
 
     <header class="container-fluid text-dark p-5 ">
@@ -30,4 +30,4 @@
         <button class="w-100 btn btn-lg btn-primary" name="login" type="submit">Sign in</button>
     </form>
 </main>
-<?php require 'views/Partials/fotter.views.php' ?>
+<?php require base_path ('views/Partials/fotter.views.php') ?>

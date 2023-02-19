@@ -1,11 +1,12 @@
 <?php
-require './utils/abort.php';
-$routes = require 'routes.php';
+
+require base_path ('/utils/abort.php');
+$routes = require base_path ('routes.php');
 
 function routing(string $path,array $routes): void
 {
     if(array_key_exists($path,$routes)){
-        require $routes[$path];
+        require base_path ($routes[$path]);
     }else{
         abort();
     }

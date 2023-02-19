@@ -3,8 +3,7 @@
 use database\Database;
 
 if(isset($_SESSION['user_id'])){
-    require './database/Database.php';
-    $config = require './config/database.php';
+    $config = require base_path ('config/database.php');
     $connection = new Database(
         datasource: $config['connections']['mysql']['driver'],
         config: $config['connections']['mysql']['config'],
@@ -45,4 +44,7 @@ if(isset($_SESSION['user_id'])){
     abort (401);
 }
 
-require 'views/Notes/create.view.php';
+Render::view ('Notes/create.view.php',[
+    'title' => 'New Note',
+    'errors' => $errors
+]);

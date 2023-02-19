@@ -1,4 +1,4 @@
-<?php require 'views/Partials/head.views.php' ?>
+<?php require base_path ('views/Partials/head.views.php'); ?>
     <main class="container-fluid">
         <header class="container-fluid text-dark p-5 ">
             <h2><?= $title ?></h2>
@@ -11,4 +11,4 @@
         </ul>
         <a class="btn btn-primary" href="/notes">back</a>
     </main>
-<?php require 'views/Partials/fotter.views.php' ?>
+<?php require base_path ('views/Partials/fotter.views.php'); ?>

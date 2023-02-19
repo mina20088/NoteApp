@@ -1,4 +1,4 @@
-<?php require 'views/Partials/head.views.php' ?>
+<?php require base_path ('views/Partials/head.views.php'); ?>
 <main class="container-fluid">
     <header class="d-flex justify-content-between align-items-center text-dark p-5 ">
         <h2><?= $title ?></h2>
@@ -28,8 +28,7 @@
 
 
 </main>
-<?php require 'views/Partials/fotter.views.php' ?>
-
+<?php require base_path ('views/Partials/fotter.views.php'); ?>
 
 
 

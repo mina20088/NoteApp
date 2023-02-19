@@ -1,8 +1,8 @@
 <?php
 
-function abort(int $status = 404): void
+function abort(int $status = 404): int
 {
-http_response_code($status);
-require "./views/Errors/{$status}.view.php";
-die();
+    http_response_code($status);
+    return require base_path ("views/Errors/{$status}.view.php");
+
 }

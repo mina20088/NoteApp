@@ -3,8 +3,10 @@
 
 
 
-$title = "Contact";
 
 
 
-require './views/contact.views.php';
+
+Render::view ('contact.view.php',[
+    'title' => "Contact"
+]);

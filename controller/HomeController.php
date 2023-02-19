@@ -1,5 +1,7 @@
 <?php
 
-$title = 'Home';
 
-require './views/home.views.php';
+
+Render::view ('home.view.php',[
+    'title' => "Home"
+]);
